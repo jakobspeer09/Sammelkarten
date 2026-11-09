@@ -594,7 +594,8 @@ const DEF={
   footer:"Eine Aktion der BG11 · Johann-Christoph-Blumhardt-Schule",l_imp:"Impressum",l_ds:"Datenschutz"
  },
  rar:[
-  {id:"common",name:"Standard",col:"#8b9198",stars:1,fx:"",info:"Die normale Karte jeder Lehrkraft",oft:"sehr häufig"},
+  {id:"common",name:"Common",col:"#8b9198",stars:1,fx:"",info:"Die Standardkarte jeder Lehrkraft",oft:"sehr häufig"},
+  {id:"holo",name:"Holo",col:"#9aa6b3",stars:2,fx:"glanz",info:"Silbern schimmernder Holo-Rahmen",oft:"selten"},
   {id:"rainbow",name:"Rainbow",col:"#ff4d6d",stars:3,fx:"rainbow",info:"Das ganze Bild im Regenbogen-Glanz",oft:"sehr selten"},
   {id:"gold",name:"Gold",col:"#e2b440",stars:4,fx:"glanz",info:"Das ganze Bild in Gold",oft:"extrem selten"},
   {id:"legend",name:"Legendär",col:"#1b2b57",stars:5,fx:"glanz",info:"Nur die Schulleitung, mit goldener Krone",oft:"extrem selten"},
@@ -603,13 +604,13 @@ const DEF={
   {id:"bild",name:"Bildkarte",col:"#c8202f",stars:1,fx:"",info:"Weihnachtsmotive und das JCBS-Logo",oft:"häufig"}
  ],
  kat:[
-  {id:"gs",name:"Grundschule",col:"#1e8a45",bonus:true,var:"Standard · Rainbow · Gold",reward:"Special-Karte Grundschule"},
-  {id:"rs",name:"Realschule",col:"#c4161c",bonus:true,var:"Standard · Rainbow · Gold",reward:"Special-Karte Realschule"},
-  {id:"kombi",name:"Kombiklasse",col:"#e06c00",bonus:true,var:"Standard · Rainbow · Gold",reward:"Special-Karte Kombiklasse"},
-  {id:"gym",name:"Gymnasium",col:"#1a56b0",bonus:true,var:"Standard · Rainbow · Gold",reward:"Special-Karte Gymnasium"},
-  {id:"bg",name:"Berufliches Gymnasium",col:"#0a8a8f",bonus:true,var:"Standard · Rainbow · Gold",reward:"Special-Karte Berufliches Gymnasium"},
-  {id:"tb",name:"Team & Betreuung",col:"#8a5a2b",bonus:true,var:"Standard · Rainbow · Gold",reward:"Special-Karte Team & Betreuung"},
-  {id:"sp",name:"Schulleitung & Seelsorge",col:"#5b2a9a",bonus:false,var:"Standard · Legendär (Schulleitung) / Mythisch (Seelsorge)",reward:""},
+  {id:"gs",name:"Grundschule",col:"#1e8a45",bonus:true,var:"Common · Holo · Rainbow · Gold",reward:"Special-Karte Grundschule"},
+  {id:"rs",name:"Realschule",col:"#c4161c",bonus:true,var:"Common · Holo · Rainbow · Gold",reward:"Special-Karte Realschule"},
+  {id:"kombi",name:"Kombiklasse",col:"#e06c00",bonus:true,var:"Common · Holo · Rainbow · Gold",reward:"Special-Karte Kombiklasse"},
+  {id:"gym",name:"Gymnasium",col:"#1a56b0",bonus:true,var:"Common · Holo · Rainbow · Gold",reward:"Special-Karte Gymnasium"},
+  {id:"bg",name:"Berufliches Gymnasium",col:"#0a8a8f",bonus:true,var:"Common · Holo · Rainbow · Gold",reward:"Special-Karte Berufliches Gymnasium"},
+  {id:"tb",name:"Team & Betreuung",col:"#8a5a2b",bonus:true,var:"Common · Holo · Rainbow · Gold",reward:"Special-Karte Team & Betreuung"},
+  {id:"sp",name:"Schulleitung & Seelsorge",col:"#5b2a9a",bonus:false,var:"Standard · Legendär / Mythisch",reward:""},
   {id:"bv",name:"Bibelverse",col:"#22357a",bonus:true,var:"Bibelvers",reward:"Special-Karte „Jesus Christus ist Sieger!“"},
   {id:"bk",name:"Bildkarten",col:"#16683a",bonus:true,var:"Bildkarte",reward:"Special-Karte Schuljahresmotto „ER HÄLT“"}
  ],
@@ -707,8 +708,8 @@ function applyCfg(d){
   for(const k in lg)if(!lg[k]||lg[k]===DEF.legal[k]||(k==="ds"&&hs(lg[k])===OLD_DS))delete lg[k];
   d={...d,legal:lg};
   C={t:{...DEF.t,...(d.t||{})},
-     rar:d.v===3&&Array.isArray(d.rar)&&d.rar.length?d.rar:clone(DEF.rar),
-     kat:d.v===3&&Array.isArray(d.kat)?d.kat:clone(DEF.kat),
+     rar:d.v===2&&Array.isArray(d.rar)&&d.rar.length?d.rar:clone(DEF.rar),
+     kat:d.v===2&&Array.isArray(d.kat)?d.kat:clone(DEF.kat),
      info:Array.isArray(d.info)?d.info:clone(DEF.info),
      legal:{...DEF.legal,...(d.legal||{})}};
 }
@@ -748,7 +749,7 @@ async function loadCfg(){
       if(j!==S.cfgJ&&!S.modal&&!S.edit){S.cfgJ=j;applyCfg(d[0].data);render();}}}catch(e){}
 }
 async function saveCfg(){
-  const data={v:3,t:{},rar:C.rar,kat:C.kat,info:C.info,legal:{}};
+  const data={v:2,t:{},rar:C.rar,kat:C.kat,info:C.info,legal:{}};
   for(const k in C.t)if(C.t[k]!==DEF.t[k])data.t[k]=C.t[k];
   for(const k in C.legal)if(C.legal[k]!==DEF.legal[k])data.legal[k]=C.legal[k];
   const d=await api("/rest/v1/site_config?id=eq.1",{method:"PATCH",body:{data},auth:true,prefer:"return=representation"});
@@ -811,11 +812,6 @@ function plSave(p){S.pl=p;try{p?localStorage.setItem("jcbs-player",JSON.stringif
 function plOut(remote){if(remote&&S.pl)rpc("player_logout",{p_token:S.pl.token}).catch(()=>{});plSave(null);S.note="";loadAlbum();}
 async function plAuth(mode,nick,pw,pw2){
   nick=String(nick||"").trim();
-  if(nick.toLowerCase()==="admin"){ // Admin-Zugang über das normale Anmelden
-    if(mode==="reg")throw new Error("Dieser Name ist reserviert. Bitte nimm einen anderen.");
-    try{await login(MAIL,pw);}catch(e){throw new Error(/falsch|invalid/i.test(e.message)?"Name oder Passwort falsch.":e.message);}
-    S.adminLogin=true;return;
-  }
   if(!NICK_RE.test(nick))throw new Error(PERR.nick_invalid);
   if(String(pw).length<6)throw new Error(PERR.pw_invalid);
   if(mode==="reg"&&pw!==pw2)throw new Error("Die beiden Passwörter sind nicht gleich.");
@@ -1242,7 +1238,7 @@ document.addEventListener("submit",async e=>{
     return render();}
   if(id==="accform"){const btn=e.target.querySelector("[type=submit]");btn.disabled=true;S.accErr="";
     const nick=$("#anick").value,mode=S.modal.mode;
-    try{await plAuth(mode,nick,$("#apw").value,($("#apw2")||{}).value);S.modal=null;toast(S.adminLogin?"Admin-Modus ✓":mode==="reg"?"Konto erstellt ✓":"Angemeldet ✓");S.adminLogin=false;
+    try{await plAuth(mode,nick,$("#apw").value,($("#apw2")||{}).value);S.modal=null;toast(mode==="reg"?"Konto erstellt ✓":"Angemeldet ✓");
       await loadAlbum();return render();}
     catch(er){S.accErr=er.message;render();const n=$("#anick");if(n)n.value=nick;return;}}
   if(id==="delform"){S.accErr="";
