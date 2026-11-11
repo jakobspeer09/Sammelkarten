@@ -576,6 +576,11 @@ footer{color:var(--mut)}
 .sl-var i{width:9px;height:9px;border-radius:50%;border:1.5px solid #fff;background:rgba(0,0,0,.45);box-shadow:0 1px 3px rgba(0,0,0,.6)}
 .sl-var i.on.v-common{background:#9aa4b5}.sl-var i.on.v-gold{background:#e2b440}
 .sl-var i.on.v-rainbow{background:conic-gradient(#ff4d6d,#f5e663,#3ddc97,#4dc3ff,#9b6bff,#ff4d6d)}
+.mini-c.real{padding:0;background:#111;width:64px}
+.mini-c.real img{display:block;width:calc(100% * 69 / 63);margin:calc(-100% * 3 / 63) 0 0 calc(-100% * 3 / 63);max-width:none;height:auto}
+.mini-c.real.rainbow{box-shadow:0 0 0 2px #fff,0 0 10px #ff4d6d}
+[data-view=desktop] .mini-c.real{width:84px}
+.oft{text-transform:none!important;letter-spacing:.02em!important}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style>
 </head>
@@ -600,8 +605,8 @@ const DEF={
   f_selten:"Seltenheit",f_gibt:"Gibt es als",f_nur:"nur {n}×",f_kat:"Kategorie",f_bereich:"Fächer / Bereich",
   k_stand:"Am Stand",h_stand:"Noch verfügbar",live:"Live-Bestand",h_food:"Zimtschnecken & Co.",stand_zeit:"Stand: {zeit} Uhr",
   st_out:"Ausverkauft",st_50:"Noch mehr als 50",st_20:"Noch mehr als 20",st_low:"Nur noch wenige",st_n:"Noch {n} übrig",st_1:"Nur noch 1 übrig",
-  k_selten:"Wie selten?",h_selten:"Seltenheiten",s_selten:"Jede Lehrkraft gibt es in mehreren Varianten. Je seltener die Karte, desto mehr glänzt sie.",
-  k_how:"So geht's",h_how:"Sammeln in 4 Schritten",how1_t:"Pack holen",how1:"Kauf an unserem Stand ein Mystery-Pack mit 5 zufälligen Karten.",how2_t:"Code eingeben",how2:"Jede Karte hat einen 6-stelligen Code. Tipp ihn hier auf der Seite ein.",how3_t:"Album füllen",how3:"Mit Konto landet jede Karte in deinem digitalen Album. Doppelte einfach tauschen!",how4_t:"Special-Karte abholen",how4:"Kategorie komplett? Zeig uns Album und echte Karten am Stand und hol dir die Special-Karte.",
+  k_selten:"Wie selten?",h_selten:"Seltenheiten",s_selten:"Jede Lehrkraft gibt es als Common, Rainbow und Gold. Je mehr Sterne, desto seltener. Die Prozente sagen, wie wahrscheinlich mindestens eine Karte dieser Stufe in einem Pack mit 5 Karten steckt.",
+  k_how:"So geht's",h_how:"Sammeln in 4 Schritten",how1_t:"Pack holen",how1:"Kauf an unserem Stand ein Mystery-Pack mit 5 zufälligen Karten.",how2_t:"Code eingeben",how2:"Jede Karte hat einen 6-stelligen Code. Tipp ihn hier auf der Seite ein.",how3_t:"Album füllen",how3:"Mit Konto landet jede Karte in deinem digitalen Album. Für eine volle Kategorie reicht jede Person in einer beliebigen Version. Doppelte einfach tauschen!",how4_t:"Special-Karte abholen",how4:"Kategorie komplett, alle 10 Bibelverse oder alle 5 Bildkarten? Zeig uns Album und echte Karten am Stand und hol dir die Special-Karte.",
   k_katinfo:"Was gibt es?",h_katinfo:"Kategorien",s_katinfo:"Jede Karte gehört zu einer Kategorie. Für jede volle Kategorie gibt es eine eigene Special-Karte.",kat_var:"Varianten",kat_reward:"Belohnung",
   k_kat:"Sammelalbum",h_kat:"Kategorien",s_kat:"Jede Karte gehört zu einer Kategorie. Sammle sie alle!",kat_label:"Kategorie",
   bonus:"🎁 Wer eine Kategorie komplett gesammelt hat, bekommt an unserem Stand eine exklusive Bonuskarte.",
@@ -620,14 +625,14 @@ const DEF={
   footer:"Eine Aktion der BG11 · Johann-Christoph-Blumhardt-Schule",l_imp:"Impressum",l_ds:"Datenschutz"
  },
  rar:[
-  {id:"common",name:"Common",col:"#8b9198",stars:1,fx:"",info:"Die Standardkarte jeder Lehrkraft",oft:"sehr häufig"},
-  {id:"bild",name:"Bildkarte",col:"#c8202f",stars:1,fx:"",info:"5 Weihnachtsmotive mit dem JCBS-Logo",oft:"häufig"},
-  {id:"bible",name:"Bibelvers",col:"#8c1a22",stars:2,fx:"",info:"10 Bibelverse im Weihnachtsdesign",oft:"selten"},
-  {id:"rainbow",name:"Rainbow",col:"#ff4d6d",stars:3,fx:"rainbow",info:"Das ganze Bild im Regenbogen-Glanz",oft:"sehr selten"},
-  {id:"gold",name:"Gold",col:"#e2b440",stars:4,fx:"glanz",info:"Das ganze Bild in Gold",oft:"extrem selten"},
-  {id:"mythic",name:"Mythisch",col:"#8a55d0",stars:5,fx:"glanz",info:"Nur der Schulseelsorger",oft:"nur 5× gedruckt"},
-  {id:"legend",name:"Legendär",col:"#1b2b57",stars:5,fx:"glanz",info:"Nur der Schulleiter – die wertvollste Karte",oft:"nur 3× gedruckt"},
-  {id:"special",name:"Special",col:"#d4a017",stars:5,fx:"glanz",info:"Belohnung für eine komplette Kategorie – nur am Stand",oft:"nicht in Packs"}
+  {id:"common",name:"Common",col:"#8b9198",stars:1,fx:"",img:"karten/fr-merkle-common.webp",info:"Die Standardkarte jeder Lehrkraft – mit Fächern, Jahren an der JCBS und Zitat. 48 verschiedene, je 46× gedruckt.",oft:"in fast jedem Pack · 99,9 %"},
+  {id:"bild",name:"Bildkarte",col:"#c8202f",stars:1,fx:"",img:"karten/bildkarte-lichterglanz.webp",info:"5 Weihnachtsmotive mit dem JCBS-Logo, je 35× gedruckt.",oft:"in ca. jedem 4. Pack · 26,6 %"},
+  {id:"bible",name:"Bibelvers",col:"#8c1a22",stars:2,fx:"",img:"karten/bibelvers-1.webp",info:"10 Bibelverse im Weihnachtsdesign, je 15× gedruckt.",oft:"in ca. jedem 4. Pack · 23,2 %"},
+  {id:"rainbow",name:"Rainbow",col:"#ff4d6d",stars:3,fx:"rainbow",img:"karten/fr-merkle-rainbow.webp",info:"Das ganze Bild im Regenbogen-Glanz. Jede Lehrkraft gibt es nur 5× als Rainbow.",oft:"in ca. jedem 3. Pack · 34,8 %"},
+  {id:"gold",name:"Gold",col:"#e2b440",stars:4,fx:"glanz",img:"karten/fr-merkle-gold.webp",info:"Das ganze Bild in Gold. Jede Lehrkraft gibt es nur 3× als Gold.",oft:"in ca. jedem 4. Pack · 22,3 %"},
+  {id:"mythic",name:"Mythisch",col:"#8a55d0",stars:5,fx:"glanz",img:"karten/schulseelsorger-mythisch.webp",info:"Nur der Schulseelsorger – im ganzen Druck gibt es ihn nur 5×.",oft:"ca. 1 von 117 Packs · 0,85 %"},
+  {id:"legend",name:"Legendär",col:"#1b2b57",stars:5,fx:"glanz",img:"karten/schulleiter-legendaer.webp",info:"Nur der Schulleiter – die wertvollste Karte. Im ganzen Druck gibt es ihn nur 3×.",oft:"ca. 1 von 195 Packs · 0,51 %"},
+  {id:"special",name:"Special",col:"#d4a017",stars:5,fx:"glanz",img:"karten/special-grundschule.webp",info:"Belohnung für eine komplette Kategorie, alle 10 Bibelverse oder alle 5 Bildkarten. Gibt es nur am Stand.",oft:"nicht in Packs"}
  ],
  kat:[
   {id:"gs",name:"Grundschule",col:"#1e8a45",bonus:true,var:"Common · Rainbow · Gold",reward:"Special-Karte Grundschule"},
@@ -735,8 +740,8 @@ function applyCfg(d){
   for(const k in lg)if(!lg[k]||lg[k]===DEF.legal[k]||(k==="ds"&&hs(lg[k])===OLD_DS))delete lg[k];
   d={...d,legal:lg};
   C={t:{...DEF.t,...(d.t||{})},
-     rar:d.v===2&&Array.isArray(d.rar)&&d.rar.length?d.rar:clone(DEF.rar),
-     kat:d.v===2&&Array.isArray(d.kat)?d.kat:clone(DEF.kat),
+     rar:d.v===2&&Array.isArray(d.rar)&&d.rar.length&&!d.rar.some(r=>r.id==="holo")&&d.rar.some(r=>r.img)?d.rar:clone(DEF.rar),
+     kat:d.v===2&&Array.isArray(d.kat)&&!d.kat.some(k=>/holo/i.test(k.var||""))?d.kat:clone(DEF.kat),
      info:Array.isArray(d.info)?d.info:clone(DEF.info),
      legal:{...DEF.legal,...(d.legal||{})}};
   for(const l of ["rar","kat"])for(const x of DEF[l])if(!C[l].some(y=>y.id===x.id))C[l].push(clone(x));
@@ -1213,7 +1218,7 @@ function pgInfos(){
    <div class="steps">${hw.map((n,i)=>`<div class="step cpanel rv" data-rv="hw${n}" data-d="${i*80}"><i>${n}</i><div>${tx("how"+n+"_t",null,"b")}${tx("how"+n,null,"p")}</div></div>`).join("")}</div></section>
   <section id="selten"><div class="rv" data-rv="hselten">${tx("k_selten",null,"span","kicker")}${tx("h_selten",null,"h2")}${tx("s_selten",null,"p","sub")}</div>
    <div class="vars">${r.map((x,i)=>`<div class="var cpanel rv" data-rv="r${i}" data-d="${(i%4)*60}">
-     <div class="mini-c${x.fx==="rainbow"?" rainbow":""}${x.fx?" foil":""}" style="--rc:${col(x.col)}"><span>${IC.hero}</span></div>
+     ${safeImg(x.img)?`<div class="mini-c real${x.fx==="rainbow"?" rainbow":""}${x.fx?" foil":""}" style="--rc:${col(x.col)}"><img src="${E(safeImg(x.img))}" alt="" loading="lazy"></div>`:`<div class="mini-c${x.fx==="rainbow"?" rainbow":""}${x.fx?" foil":""}" style="--rc:${col(x.col)}"><span>${IC.hero}</span></div>`}
      <div class="vt"><b>${E(x.name)}</b><em>${stars(x.stars)}</em><p>${E(x.info||"")}</p>${x.oft?`<span class="oft">${E(x.oft)}</span>`:""}</div></div>`).join("")}</div>
    ${S.edit?edRar():""}</section>
   <section id="kategorien"><div class="rv" data-rv="hkat">${tx("k_katinfo",null,"span","kicker")}${tx("h_katinfo",null,"h2")}${tx("s_katinfo",null,"p","sub")}</div>
