@@ -550,6 +550,32 @@ footer{color:var(--mut)}
 [data-view=desktop] .rcard{flex-direction:column;align-items:flex-start}
 [data-view=desktop] .info{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 [data-view=desktop] .irow{flex-direction:column;align-items:flex-start}
+
+/* ===== Echte Kartenbilder (Update 6) ===== */
+.tcard.real{padding:0;background:transparent;box-shadow:none;width:min(290px,80vw);border-radius:14px}
+.tc-clip{position:absolute;inset:0;border-radius:14px;overflow:hidden;background:#111;box-shadow:0 0 0 2px rgba(255,255,255,.25),0 18px 40px -14px rgba(0,0,0,.8)}
+.tc-photo{display:block;width:calc(100% * 69 / 63);margin:calc(-100% * 3 / 63) 0 0 calc(-100% * 3 / 63);max-width:none;height:auto;pointer-events:none;-webkit-user-select:none;user-select:none}
+.tc-shine{position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;background:linear-gradient(115deg,transparent 25%,rgba(255,255,255,.8) 42%,transparent 58%);background-size:260% 100%;animation:shine 2.8s ease-in-out infinite;opacity:0}
+.r-rainbow .tc-shine,.r-gold .tc-shine,.r-legend .tc-shine,.r-mythic .tc-shine,.r-special .tc-shine{opacity:1}
+.r-rainbow .tc-clip{animation:rbglow 3s linear infinite}
+.r-gold .tc-clip,.r-special .tc-clip{box-shadow:0 0 0 2px #ffe08a,0 0 34px 6px rgba(245,196,81,.75)}
+.r-legend .tc-clip{animation:lgglow 2.2s ease-in-out infinite}
+.r-mythic .tc-clip{animation:myglow 2.2s ease-in-out infinite}
+.r-bible .tc-clip{box-shadow:0 0 0 2px #e2b440,0 0 26px 2px rgba(140,26,34,.6)}
+@keyframes rbglow{0%{box-shadow:0 0 0 2px #fff,0 0 34px 6px #ff4d6d}25%{box-shadow:0 0 0 2px #fff,0 0 34px 6px #f5e663}50%{box-shadow:0 0 0 2px #fff,0 0 34px 6px #3ddc97}75%{box-shadow:0 0 0 2px #fff,0 0 34px 6px #4dc3ff}100%{box-shadow:0 0 0 2px #fff,0 0 34px 6px #ff4d6d}}
+@keyframes lgglow{0%,100%{box-shadow:0 0 0 2px #ffe08a,0 0 30px 6px rgba(245,196,81,.7)}50%{box-shadow:0 0 0 3px #fff3c4,0 0 60px 16px rgba(245,196,81,.95)}}
+@keyframes myglow{0%,100%{box-shadow:0 0 0 2px #e6c6ff,0 0 30px 6px rgba(155,107,255,.7)}50%{box-shadow:0 0 0 3px #fff,0 0 60px 16px rgba(155,107,255,.95)}}
+.rlabel{display:inline-flex;align-items:center;gap:6px}
+.rlabel em{font-style:normal;color:var(--gold);letter-spacing:-.05em}
+.slot.real{padding:0;background:#111;overflow:hidden}
+.slot.real img{display:block;width:calc(100% * 69 / 63);margin:calc(-100% * 3 / 63) 0 0 calc(-100% * 3 / 63);max-width:none;height:auto}
+.slot.real.r-rainbow{box-shadow:0 0 0 2px #fff,0 0 12px #ff4d6d}
+.slot.real.r-gold,.slot.real.r-legend,.slot.real.r-special{box-shadow:0 0 0 2px #ffe08a,0 0 12px rgba(245,196,81,.8)}
+.slot.real.r-mythic{box-shadow:0 0 0 2px #e6c6ff,0 0 12px rgba(155,107,255,.8)}
+.sl-var{position:absolute;left:0;right:0;bottom:5px;display:flex;gap:4px;justify-content:center;pointer-events:none}
+.sl-var i{width:9px;height:9px;border-radius:50%;border:1.5px solid #fff;background:rgba(0,0,0,.45);box-shadow:0 1px 3px rgba(0,0,0,.6)}
+.sl-var i.on.v-common{background:#9aa4b5}.sl-var i.on.v-gold{background:#e2b440}
+.sl-var i.on.v-rainbow{background:conic-gradient(#ff4d6d,#f5e663,#3ddc97,#4dc3ff,#9b6bff,#ff4d6d)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style>
 </head>
@@ -570,7 +596,7 @@ const DEF={
   nav_karte:"Karte prüfen",nav_stand:"Stand",nav_selten:"Seltenheiten",nav_kat:"Kategorien",nav_info:"Infos",
   k_karte:"Karte gezogen?",h_karte:"Code eingeben",s_karte:"Gib den 6-stelligen Code von deiner Karte ein. Bist du angemeldet, landet sie sofort in deinem Album.",
   btn_pruefen:"Prüfen",pack_txt:"Pack wird geöffnet",err_len:"Bitte genau 6 Ziffern eingeben.",err_none:"Diesen Code gibt es nicht. Bitte nochmal genau abtippen.",
-  c_bereich:"Fächer / Bereich",c_auflage:"Auflage",
+  c_bereich:"Fächer / Bereich",c_auflage:"Auflage",f_sel:"Seltenheit",f_auflage:"So oft gedruckt",f_auflage_v:"{n}× im ganzen Druck",
   f_selten:"Seltenheit",f_gibt:"Gibt es als",f_nur:"nur {n}×",f_kat:"Kategorie",f_bereich:"Fächer / Bereich",
   k_stand:"Am Stand",h_stand:"Noch verfügbar",live:"Live-Bestand",h_food:"Zimtschnecken & Co.",stand_zeit:"Stand: {zeit} Uhr",
   st_out:"Ausverkauft",st_50:"Noch mehr als 50",st_20:"Noch mehr als 20",st_low:"Nur noch wenige",st_n:"Noch {n} übrig",st_1:"Nur noch 1 übrig",
@@ -595,24 +621,25 @@ const DEF={
  },
  rar:[
   {id:"common",name:"Common",col:"#8b9198",stars:1,fx:"",info:"Die Standardkarte jeder Lehrkraft",oft:"sehr häufig"},
-  {id:"holo",name:"Holo",col:"#9aa6b3",stars:2,fx:"glanz",info:"Silbern schimmernder Holo-Rahmen",oft:"selten"},
+  {id:"bild",name:"Bildkarte",col:"#c8202f",stars:1,fx:"",info:"5 Weihnachtsmotive mit dem JCBS-Logo",oft:"häufig"},
+  {id:"bible",name:"Bibelvers",col:"#8c1a22",stars:2,fx:"",info:"10 Bibelverse im Weihnachtsdesign",oft:"selten"},
   {id:"rainbow",name:"Rainbow",col:"#ff4d6d",stars:3,fx:"rainbow",info:"Das ganze Bild im Regenbogen-Glanz",oft:"sehr selten"},
   {id:"gold",name:"Gold",col:"#e2b440",stars:4,fx:"glanz",info:"Das ganze Bild in Gold",oft:"extrem selten"},
-  {id:"legend",name:"Legendär",col:"#1b2b57",stars:5,fx:"glanz",info:"Nur die Schulleitung, mit goldener Krone",oft:"extrem selten"},
-  {id:"mythic",name:"Mythisch",col:"#8a55d0",stars:5,fx:"glanz",info:"Nur die Schulseelsorge, mit goldenem Kreuz",oft:"extrem selten"},
-  {id:"bible",name:"Bibelvers",col:"#22357a",stars:2,fx:"",info:"9 weihnachtliche Bibelverse",oft:"selten"},
-  {id:"bild",name:"Bildkarte",col:"#c8202f",stars:1,fx:"",info:"Weihnachtsmotive und das JCBS-Logo",oft:"häufig"}
+  {id:"mythic",name:"Mythisch",col:"#8a55d0",stars:5,fx:"glanz",info:"Nur der Schulseelsorger",oft:"nur 5× gedruckt"},
+  {id:"legend",name:"Legendär",col:"#1b2b57",stars:5,fx:"glanz",info:"Nur der Schulleiter – die wertvollste Karte",oft:"nur 3× gedruckt"},
+  {id:"special",name:"Special",col:"#d4a017",stars:5,fx:"glanz",info:"Belohnung für eine komplette Kategorie – nur am Stand",oft:"nicht in Packs"}
  ],
  kat:[
-  {id:"gs",name:"Grundschule",col:"#1e8a45",bonus:true,var:"Common · Holo · Rainbow · Gold",reward:"Special-Karte Grundschule"},
-  {id:"rs",name:"Realschule",col:"#c4161c",bonus:true,var:"Common · Holo · Rainbow · Gold",reward:"Special-Karte Realschule"},
-  {id:"kombi",name:"Kombiklasse",col:"#e06c00",bonus:true,var:"Common · Holo · Rainbow · Gold",reward:"Special-Karte Kombiklasse"},
-  {id:"gym",name:"Gymnasium",col:"#1a56b0",bonus:true,var:"Common · Holo · Rainbow · Gold",reward:"Special-Karte Gymnasium"},
-  {id:"bg",name:"Berufliches Gymnasium",col:"#0a8a8f",bonus:true,var:"Common · Holo · Rainbow · Gold",reward:"Special-Karte Berufliches Gymnasium"},
-  {id:"tb",name:"Team & Betreuung",col:"#8a5a2b",bonus:true,var:"Common · Holo · Rainbow · Gold",reward:"Special-Karte Team & Betreuung"},
-  {id:"sp",name:"Schulleitung & Seelsorge",col:"#5b2a9a",bonus:false,var:"Standard · Legendär / Mythisch",reward:""},
-  {id:"bv",name:"Bibelverse",col:"#22357a",bonus:true,var:"Bibelvers",reward:"Special-Karte „Jesus Christus ist Sieger!“"},
-  {id:"bk",name:"Bildkarten",col:"#16683a",bonus:true,var:"Bildkarte",reward:"Special-Karte Schuljahresmotto „ER HÄLT“"}
+  {id:"gs",name:"Grundschule",col:"#1e8a45",bonus:true,var:"Common · Rainbow · Gold",reward:"Special-Karte Grundschule"},
+  {id:"rs",name:"Realschule",col:"#c4161c",bonus:true,var:"Common · Rainbow · Gold",reward:"Special-Karte Realschule"},
+  {id:"kombi",name:"Kombiklasse",col:"#e06c00",bonus:true,var:"Common · Rainbow · Gold",reward:"Special-Karte Kombiklasse"},
+  {id:"gym",name:"Gymnasium",col:"#1a56b0",bonus:true,var:"Common · Rainbow · Gold",reward:"Special-Karte Gymnasium"},
+  {id:"bg",name:"Berufliches Gymnasium",col:"#0a8a8f",bonus:true,var:"Common · Rainbow · Gold",reward:"Special-Karte Berufliches Gymnasium"},
+  {id:"tb",name:"Team & Betreuung",col:"#8a5a2b",bonus:true,var:"Common · Rainbow · Gold",reward:"Special-Karte Team & Betreuung"},
+  {id:"sp",name:"Schulleitung & Seelsorge",col:"#5b2a9a",bonus:false,var:"Legendär · Mythisch",reward:""},
+  {id:"bv",name:"Bibelverse",col:"#8c1a22",bonus:true,var:"Bibelvers",reward:"Special-Karte „Jesus Christus ist Sieger!“"},
+  {id:"bk",name:"Bildkarten",col:"#16683a",bonus:true,var:"Bildkarte",reward:"Special-Karte Schuljahresmotto „ER HÄLT“"},
+  {id:"special",name:"Special-Karten",col:"#d4a017",bonus:false,var:"Belohnungskarte",reward:""}
  ],
  info:[
   {ic:"pin",l:"Wo?",t:"Klassenzimmer XXX"},
@@ -712,6 +739,7 @@ function applyCfg(d){
      kat:d.v===2&&Array.isArray(d.kat)?d.kat:clone(DEF.kat),
      info:Array.isArray(d.info)?d.info:clone(DEF.info),
      legal:{...DEF.legal,...(d.legal||{})}};
+  for(const l of ["rar","kat"])for(const x of DEF[l])if(!C[l].some(y=>y.id===x.id))C[l].push(clone(x));
 }
 function toast(m){const t=document.createElement("div");t.className="toast";t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2200);}
 
@@ -790,7 +818,7 @@ let rzT=0;addEventListener("resize",()=>{clearTimeout(rzT);rzT=setTimeout(()=>{i
 async function cardAdmin(a,b){
   S.acOpen=true;
   try{
-    if(a==="accsv"){const rows=[["Name","Bereich","Kategorie","Code"],...S.acards.map(c=>[c.name,c.bereich||"",katOf(c.kat).name,c.code])];
+    if(a==="accsv"){const rows=[["Name","Seltenheit","Bereich","Kategorie","Code","Auflage","Bild"],...S.acards.map(c=>[c.name,rarOf(c.rarity).name,c.bereich||"",katOf(c.kat).name,c.code,c.auflage||"",c.img||""])];
       const csv="﻿"+rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(";")).join("\r\n");
       const l=document.createElement("a");l.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));l.download="Kartencodes.csv";l.click();return;}
     if(a==="acadd"){const n=$("#acn").value.trim();if(!n)return alert("Bitte einen Namen eingeben.");
@@ -832,7 +860,13 @@ function groups(){
   if(rest.length&&S.admin)g.push({k:{id:"_rest",name:"⚠ Noch ohne Kategorie (nur für Admins sichtbar)",col:"#9aa4b5",bonus:false},cards:rest});
   return g;
 }
-const doneSet=()=>new Set(groups().filter(g=>g.k.id!=="_rest"&&g.cards.length&&g.cards.every(c=>c.own)).map(g=>g.k.id));
+function persons(cards){
+  const m=new Map();
+  for(const c of cards){let p=m.get(c.name);if(!p){p={name:c.name,kat:c.kat,cards:[]};m.set(c.name,p);}p.cards.push(c);}
+  for(const p of m.values()){p.cards.sort((a,b)=>(RANK[a.rarity]||0)-(RANK[b.rarity]||0));p.own=p.cards.filter(c=>c.own);p.best=p.own[p.own.length-1]||null;}
+  return [...m.values()];
+}
+const doneSet=()=>new Set(groups().filter(g=>g.k.id!=="_rest"&&g.cards.length&&persons(g.cards).every(p=>p.own.length)).map(g=>g.k.id));
 const ownCount=()=>{const ids=new Set(C.kat.map(k=>k.id)),c=((S.album&&S.album.cards)||[]).filter(x=>ids.has(x.kat));return {n:c.filter(x=>x.own).length,m:c.length};};
 async function loadAlbum(){
   try{const d=await rpc("album_get",{p_token:S.pl?S.pl.token:null});
@@ -918,8 +952,12 @@ function renderStock(){
 /* ============ KARTE ============ */
 function stars(n){return "★".repeat(Math.max(1,Math.min(5,n|0)));}
 const isSp=c=>c&&c.kat==="sp";
+const RANK={common:1,bild:1,bible:2,rainbow:3,gold:4,special:5,mythic:5,legend:6};
+const rcol=c=>col(rarOf(c.rarity).col);
+const rlabel=c=>{const r=rarOf(c.rarity);return `<span class="rlabel">${E(r.name)} <em>${stars(r.stars)}</em></span>`;};
 function cardHTML(c){
   const k=katOf(c.kat),u=safeImg(c.img),sp=isSp(c);
+  if(u)return `<div class="tcard real r-${E(c.rarity||"common")}" style="--rc:${rcol(c)}"><div class="tc-clip"><img class="tc-photo" src="${E(u)}" alt="${E(c.name)}" draggable="false"><div class="tc-shine"></div></div><div class="glare"></div></div>`;
   return `<div class="tcard${sp?" foil":""}" style="--rc:${col(k.col)}"><div class="tc-in">
    <div class="tc-name">${E(c.name)}</div>
    <div class="tc-img">${u?`<img src="${E(u)}" alt="">`:IC.hero}</div>
@@ -930,10 +968,12 @@ function renderResult(){
   const box=$("#result");if(!box)return;
   if(S.err){box.innerHTML=`<div class="msg">${E(S.err)}</div>`;return;}
   const c=S.card;if(!c){box.innerHTML="";return;}
-  const k=katOf(c.kat),rc=col(k.col);
-  if(S.phase==="pack"){box.innerHTML=`<div class="stage" style="--rc:${rc}"><div class="pack"><b>?</b><i>${E(T("pack_txt"))}</i></div></div>`;return;}
-  box.innerHTML=`<div class="stage" style="--rc:${rc}">${cardHTML(c)}</div><div class="facts">
+  const k=katOf(c.kat),rc=col(k.col),rr=rcol(c),big=(RANK[c.rarity]||1)>=3;
+  if(S.phase==="pack"){box.innerHTML=`<div class="stage" style="--rc:${rr}"><div class="pack"><b>?</b><i>${E(T("pack_txt"))}</i></div></div>`;return;}
+  box.innerHTML=`<div class="stage" style="--rc:${rr}">${big&&!RM?'<div class="rays"></div>':""}${cardHTML(c)}</div><div class="facts">
+   <div class="fact">${tx("f_sel",null,"small")}<b style="color:${rr}">${rlabel(c)}</b></div>
    <div class="fact">${tx("f_kat",null,"small")}<b style="color:${rc}">${E(k.name)}</b></div>
+   ${c.auflage?`<div class="fact">${tx("f_auflage",null,"small")}<b>${E(T("f_auflage_v",{n:c.auflage}))}</b></div>`:""}
    <div class="fact">${tx("f_gibt",null,"small")}<b>${E(k.var||"–")}</b></div>
    ${c.bereich?`<div class="fact wide">${tx("f_bereich",null,"small")}<b>${E(c.bereich)}</b></div>`:""}</div>${noteHTML()}`;
   bindTilt();
@@ -966,11 +1006,12 @@ async function check(){
   if(RM){renderResult();return;}
   S.phase="pack";renderResult();
   await new Promise(r=>setTimeout(r,950));
-  const rc=col(katOf(c.kat).col);
+  const rc=rcol(c),rk=RANK[c.rarity]||1;
   const f=document.createElement("div");f.className="flash";f.style.setProperty("--rc",rc);document.body.appendChild(f);setTimeout(()=>f.remove(),700);
   S.phase="";renderResult();
-  const lvl=isSp(c)?4:1;
-  burst(rc,14+lvl*10,isSp(c));
+  const lvl=rk;
+  burst(rc,14+lvl*14,lvl>=3);
+  if(lvl>=4)setTimeout(()=>burst(rc,40+lvl*10,true),450);
   if(S.noteK)setTimeout(()=>{burst("#c8323c",70,true);toast(T("alb_kdone",{k:S.noteK}));},700);
   if(navigator.vibrate)try{navigator.vibrate(lvl>=3?[40,40,80]:30)}catch(e){}
 }
@@ -1099,9 +1140,10 @@ function modalHTML(){
      <div class="row"><button class="btn ghost" data-a="mclose">Schließen</button></div></div></div>`;}
   if(m.type==="card"){const c=S.album&&S.album.cards[m.i];if(!c)return "";const k=katOf(c.kat);
     return `<div class="modal" data-a="mbg"><div class="mbox" style="background:transparent;border:0;box-shadow:none;overflow:visible">
-     <div class="stage" style="--rc:${col(k.col)}">${cardHTML(c)}</div>
-     <div class="facts" style="margin-top:14px"><div class="fact">${tx("f_kat",null,"small")}<b style="color:${col(k.col)}">${E(k.name)}</b></div>
-     <div class="fact">${tx("f_gibt",null,"small")}<b>${E(k.var||"–")}</b></div></div>
+     <div class="stage" style="--rc:${rcol(c)}">${cardHTML(c)}</div>
+     <div class="facts" style="margin-top:14px"><div class="fact">${tx("f_sel",null,"small")}<b style="color:${rcol(c)}">${rlabel(c)}</b></div>
+     <div class="fact">${tx("f_kat",null,"small")}<b style="color:${col(k.col)}">${E(k.name)}</b></div>
+     ${c.auflage?`<div class="fact wide">${tx("f_auflage",null,"small")}<b>${E(T("f_auflage_v",{n:c.auflage}))}</b></div>`:""}</div>
      <div class="row"><button class="btn ghost" data-a="mclose">Schließen</button></div></div></div>`;}
   return "";
 }
@@ -1125,12 +1167,15 @@ function pgStart(){
    <a class="tile" href="#album">${IC.album}<div>${tx("start_album",null,"b")}<small id="albtile">${E(tileTxt())}</small></div></a>
    <a class="tile" href="#stand">${IC.pack}<div>${tx("start_stand",null,"b")}${tx("start_stand_s",null,"small")}</div></a></div></section>`;
 }
-function slotHTML(c,i){
-  if(!c.own)return `<div class="slot miss"><div class="sl-in"><div class="sl-name">${E(c.name)}</div><div class="sl-img px">${IC.lock}</div></div></div>`;
-  const k=katOf(c.kat),u=safeImg(c.img),sp=isSp(c);
-  return `<button class="slot${sp?" foil":""}${S.newName===c.name?" new":""}" data-a="card" data-i="${i}" style="--rc:${col(k.col)}" aria-label="${E(c.name)}"><div class="sl-in">
-   <div class="sl-name">${E(c.name)}</div><div class="sl-img">${u?`<img src="${E(u)}" alt="" loading="lazy">`:IC.hero}</div>
-   <div class="sl-st">${sp?"★★★★★":"★"}</div></div></button>`;
+function slotHTML(p,all){
+  const c=p.best;
+  if(!c)return `<div class="slot miss"><div class="sl-in"><div class="sl-name">${E(p.name)}</div><div class="sl-img px">${IC.lock}</div></div></div>`;
+  const i=all.indexOf(c),u=safeImg(c.img),k=katOf(c.kat);
+  const dots=p.cards.length>1?`<div class="sl-var">${p.cards.map(v=>`<i class="v-${E(v.rarity)}${v.own?" on":""}" title="${E(rarOf(v.rarity).name)}"></i>`).join("")}</div>`:"";
+  if(u)return `<button class="slot real r-${E(c.rarity)}${S.newName===c.name?" new":""}" data-a="card" data-i="${i}" aria-label="${E(c.name)}"><img src="${E(u)}" alt="" loading="lazy">${dots}</button>`;
+  return `<button class="slot${S.newName===c.name?" new":""}" data-a="card" data-i="${i}" style="--rc:${col(k.col)}" aria-label="${E(c.name)}"><div class="sl-in">
+   <div class="sl-name">${E(c.name)}</div><div class="sl-img">${IC.hero}</div>
+   <div class="sl-st">${stars(rarOf(c.rarity).stars)}</div></div>${dots}</button>`;
 }
 function pgAlbum(){
   const all=(S.album&&S.album.cards)||[],o=ownCount(),done=doneSet();
@@ -1142,12 +1187,12 @@ function pgAlbum(){
     <button class="accb" data-a="acc" aria-label="Konto">${IC.user}</button></div>`;}
   if(S.albumErr)h+=`<div class="msg">${E(S.albumErr)}</div>`;
   if(!S.album&&!S.albumErr)h+=`<div class="skel"></div><div class="skel"></div>`;
-  if(S.album)h+=`<div class="agrid">`+groups().map(g=>{const n=g.cards.filter(c=>c.own).length,m=g.cards.length,d=done.has(g.k.id)&&S.pl;
+  if(S.album)h+=`<div class="agrid">`+groups().map(g=>{const ps=persons(g.cards),n=ps.filter(p=>p.own.length).length,m=ps.length,d=done.has(g.k.id)&&S.pl;
     return `<div class="acat${d?" done":""}" style="--kc:${col(g.k.col)}">
      <div class="ahead"><b>${E(g.k.name)}</b><span>${n} / ${m}</span></div>
      <div class="bar"><i style="--p:${m?n/m*100:0}%"></i></div>
-     ${m?`<div class="slots">${g.cards.map(c=>slotHTML(c,all.indexOf(c))).join("")}</div>`:`<p class="hint">${E(T("alb_empty"))}</p>`}
-     ${d?`<div class="done-b">${tx("alb_done",null,"b")}${g.k.bonus===false?tx("alb_done_sp"):tx("alb_done_txt")}</div>`:""}</div>`;}).join("")+`</div>`;
+     ${m?`<div class="slots">${ps.map(p=>slotHTML(p,all)).join("")}</div>`:`<p class="hint">${E(T("alb_empty"))}</p>`}
+     ${d?`<div class="done-b">${tx("alb_done",null,"b")}${g.k.id==="special"?tx("alb_done_sp"):g.k.bonus===false?"":tx("alb_done_txt")}</div>`:""}</div>`;}).join("")+`</div>`;
   if(S.album)h+=rewardsHTML(done);
   if(S.edit)h+=edKat();
   if(S.admin)h+=cardAdminHTML();
@@ -1182,7 +1227,7 @@ function pgInfos(){
 function rewardsHTML(done){
   const ks=C.kat.filter(k=>k.bonus!==false&&k.reward),all=(S.album&&S.album.cards)||[];if(!ks.length)return "";
   return `<div class="rewards"><div>${tx("k_rew",null,"span","kicker")}${tx("h_rew",null,"h2")}${tx("s_rew",null,"p","sub")}</div>
-   <div class="rgrid">${ks.map(k=>{const cs=all.filter(c=>c.kat===k.id),n=cs.filter(c=>c.own).length,m=cs.length,ok=S.pl&&m&&n===m;
+   <div class="rgrid">${ks.map(k=>{const cs=persons(all.filter(c=>c.kat===k.id)),n=cs.filter(p=>p.own.length).length,m=cs.length,ok=S.pl&&m&&n===m;
     return `<div class="rcard${ok?" got":""}" style="--kc:${col(k.col)}"><div class="medal">${ok?"★":IC.lock}</div><div class="rt"><b>${E(k.reward)}</b>
      <small>${ok?E(T("rew_got")):E(T("rew_open",{m:m||"?",k:k.name}))}</small>${!ok&&S.pl&&m?`<div class="bar"><i style="--p:${n/m*100}%"></i></div>`:""}</div></div>`;}).join("")}</div></div>`;
 }
@@ -1194,7 +1239,7 @@ function cardAdminHTML(){
    ${!L?`<button class="btn sm" data-a="acload">Karten laden</button>`:`
    <div class="acnew"><input id="acn" placeholder="Name, z. B. Fr. Muster"><input id="acb" placeholder="Fächer / Bereich"><select id="ack">${opt("offen")}</select><button class="btn sm" data-a="acadd">+ Karte anlegen</button></div>
    <div class="aclist">${L.map((c,i)=>`<div class="acrow" data-i="${i}"><input data-f="name" value="${E(c.name)}"><input data-f="bereich" value="${E(c.bereich||"")}" placeholder="Fächer / Bereich">
-     <select data-f="kat">${opt(c.kat)}</select><code title="Kartencode">${E(c.code)}</code><button class="mv" data-a="acsave" title="Speichern">✓</button><button class="x" data-a="acdel" title="Löschen">✕</button></div>`).join("")}</div>
+     <select data-f="kat">${opt(c.kat)}</select><code title="Kartencode · Seltenheit">${E(c.code)}<small style="display:block;font-size:.65em;opacity:.75">${E(rarOf(c.rarity).name)}</small></code><button class="mv" data-a="acsave" title="Speichern">✓</button><button class="x" data-a="acdel" title="Löschen">✕</button></div>`).join("")}</div>
    <button class="btn sm ghost" data-a="accsv">Codes als Liste herunterladen (CSV)</button>`}</details>`;
 }
 function render(){
