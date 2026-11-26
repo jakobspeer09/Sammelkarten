@@ -1030,15 +1030,15 @@ async function adminSignup(email,pw){
   if(!S.admin){logout();throw new Error("Konto erstellt, aber diese E-Mail hat keine Admin-Rechte.");}
   return "ok";
 }
-/* Admin über den normalen Login: Nickname "Admin" + Passwort (dahinter steckt das Konto ${MAIL}) */
-const ADMIN_NICK="Admin";
+/* Admin über den normalen Login: Nickname "BG11" + Passwort (dahinter steckt das Konto ${MAIL}) */
+const ADMIN_NICK="BG11";
 const isAdminNick=n=>String(n||"").trim().toLowerCase()===ADMIN_NICK.toLowerCase();
 async function adminViaNick(mode,pw,pw2){
   if(String(pw).length<6)throw new Error("Das Passwort braucht mindestens 6 Zeichen.");
   if(mode==="reg"){
     if(pw!==pw2)throw new Error("Die beiden Passwörter sind nicht gleich.");
     const r=await adminSignup(MAIL,pw);
-    if(r==="confirm")throw new Error("Admin-Konto erstellt! Bitte den Link in der Mail an "+MAIL+" anklicken und dich dann mit „Admin“ anmelden.");
+    if(r==="confirm")throw new Error("Admin-Konto erstellt! Bitte den Link in der Mail an "+MAIL+" anklicken und dich dann mit „BG11“ anmelden.");
     return;}
   try{await login(MAIL,pw);}
   catch(e){throw new Error(/falsch/.test(e.message)?"Passwort falsch.":/bestätigt/.test(e.message)?"Bitte zuerst den Bestätigungs-Link in der Mail an "+MAIL+" anklicken.":/kein Admin/.test(e.message)?"Admin-Rechte fehlen noch – bitte supabase_update8.sql ausführen.":e.message);}
