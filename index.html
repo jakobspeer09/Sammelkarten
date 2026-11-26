@@ -1030,6 +1030,19 @@ async function adminSignup(email,pw){
   if(!S.admin){logout();throw new Error("Konto erstellt, aber diese E-Mail hat keine Admin-Rechte.");}
   return "ok";
 }
+/* Admin über den normalen Login: Nickname "Admin" + Passwort (dahinter steckt das Konto ${MAIL}) */
+const ADMIN_NICK="Admin";
+const isAdminNick=n=>String(n||"").trim().toLowerCase()===ADMIN_NICK.toLowerCase();
+async function adminViaNick(mode,pw,pw2){
+  if(String(pw).length<6)throw new Error("Das Passwort braucht mindestens 6 Zeichen.");
+  if(mode==="reg"){
+    if(pw!==pw2)throw new Error("Die beiden Passwörter sind nicht gleich.");
+    const r=await adminSignup(MAIL,pw);
+    if(r==="confirm")throw new Error("Admin-Konto erstellt! Bitte den Link in der Mail an "+MAIL+" anklicken und dich dann mit „Admin“ anmelden.");
+    return;}
+  try{await login(MAIL,pw);}
+  catch(e){throw new Error(/falsch/.test(e.message)?"Passwort falsch.":/bestätigt/.test(e.message)?"Bitte zuerst den Bestätigungs-Link in der Mail an "+MAIL+" anklicken.":/kein Admin/.test(e.message)?"Admin-Rechte fehlen noch – bitte supabase_update8.sql ausführen.":e.message);}
+}
 function logout(){S.tok=null;S.admin=false;S.edit=false;try{localStorage.removeItem("jcbs-tok")}catch(e){}render();}
 async function loadCfg(){
   try{const d=await api("/rest/v1/site_config?id=eq.1&select=data");
@@ -1570,7 +1583,7 @@ function render(){
   ${S.admin?`<div class="adm"><span>Admin</span><button data-a="edit" class="${S.edit?"on":""}">${S.edit?"✓ Fertig":"✏️ Bearbeiten"}</button><button data-a="logout">Abmelden</button></div>`:""}
   <div class="top"><a class="brand" href="#start"><img src="${LOGO_S}" alt="">${E(T("titel"))} <b>${E(T("titel2"))}</b></a>
    <nav class="tnav">${NAVP().map(p=>`<a href="#${p}" class="${S.page===p?"on":""}">${TI[p]}${E(T(p==="infos"?"nav_info":"nav_"+p))}${p==="album"?badge().replace('id="tabbd"',''):""}</a>`).join("")}</nav>
-   <button class="accb${S.pl?" in":""}" data-a="acc">${IC.user}<span>${E(S.pl?S.pl.nick:T("btn_login"))}</span></button></div>
+   <button class="accb${S.pl?" in":""}" data-a="acc">${IC.user}<span>${E(S.pl?S.pl.nick:S.admin?ADMIN_NICK:T("btn_login"))}</span></button></div>
   <div class="page" data-pg="${S.page}">${pg()}</div>
   <footer>${tx("footer",null,"div","ft")}
    <div class="legal"><button data-a="legal" data-k="imp">${E(T("l_imp"))}</button><button data-a="legal" data-k="ds">${E(T("l_ds"))}</button></div>
@@ -1689,7 +1702,8 @@ document.addEventListener("submit",async e=>{
     return render();}
   if(id==="accform"){const btn=e.target.querySelector("[type=submit]");btn.disabled=true;S.accErr="";
     const nick=$("#anick").value,mode=S.modal.mode;
-    try{await plAuth(mode,nick,$("#apw").value,($("#apw2")||{}).value);S.modal=null;toast(mode==="reg"?"Konto erstellt ✓":"Angemeldet ✓");
+    try{if(isAdminNick(nick)){await adminViaNick(mode,$("#apw").value,($("#apw2")||{}).value);S.modal=null;toast("Admin angemeldet ✓");return render();}
+      await plAuth(mode,nick,$("#apw").value,($("#apw2")||{}).value);S.modal=null;toast(mode==="reg"?"Konto erstellt ✓":"Angemeldet ✓");
       await loadAlbum();return render();}
     catch(er){S.accErr=er.message;render();const n=$("#anick");if(n)n.value=nick;return;}}
   if(id==="delform"){S.accErr="";
