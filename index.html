@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" id="vp" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" id="vp" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src data:; img-src 'self' data:; connect-src https://*.supabase.co; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0c2e20">
@@ -741,6 +741,77 @@ a.btn{text-decoration:none}
 [data-view=desktop] .chips{margin-top:0}
 #stock{padding-bottom:90px}
 
+
+/* ===== Update 8: stabil wie eine App, iPad-Feinschliff, Admin-Kartenliste ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden;overscroll-behavior-x:none}
+html,body{touch-action:pan-x pan-y}
+body{overflow-x:hidden;width:100%;position:relative}
+button,a,input,select,textarea,.cimg{touch-action:manipulation}
+.fan{touch-action:pan-y}
+.hero{overflow-x:clip}
+.top{transform:translateZ(0)}
+input,select,textarea{font-size:max(16px,1em)}
+.ctl input,.ctl select,.ed input,.ed select,.acnew input,.acnew select,.acrow input,.acrow select{font-size:16px}
+img{-webkit-user-drag:none}
+.zbox{max-width:560px!important}
+.zbox .tcard.real{width:min(420px,84vw,calc((100dvh - 260px) * 63 / 88))}
+.zname{font-size:1.35rem!important;color:var(--ink)}
+/* Admin-Kartenliste */
+.ksearch{position:relative;display:flex;align-items:center;margin:4px 0 10px}
+.ksearch svg{position:absolute;left:14px;width:20px;height:20px;color:#b3141f;pointer-events:none}
+.ksearch input{flex:1;height:52px;border-radius:14px;border:2px solid #c9a24a;background:#fffaf0;color:var(--ink);padding:0 46px;font:600 1.05rem Inter,sans-serif;box-shadow:inset 0 2px 6px rgba(120,80,20,.12);-webkit-appearance:none;appearance:none}
+.ksearch input:focus{outline:none;border-color:#16683a;box-shadow:0 0 0 4px rgba(30,138,69,.2)}
+.ksearch input::-webkit-search-cancel-button{display:none}
+.kx{position:absolute;right:8px;width:36px;height:36px;border:0;border-radius:50%;background:#ecdfbd;color:var(--ink);font-weight:800;cursor:pointer}
+.klist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 10px}
+.kl-it{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:4px;cursor:pointer;min-width:0;animation:pop .35s both}
+.kl-it[hidden]{display:none}
+.kl-it .cimg{transition:transform .2s}
+.kl-it:active .cimg{transform:scale(.96)}
+.kl-it b{font:400 .88rem/1.15 Lilita,Inter,sans-serif;color:var(--txt);margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kl-it small{font:700 .68rem/1.2 RC,Inter,sans-serif;letter-spacing:.02em}
+.kl-it small span{color:var(--mut);font-weight:500}
+[data-view=tablet] .klist{grid-template-columns:repeat(5,minmax(0,1fr));gap:18px 14px}
+[data-view=desktop] .klist{grid-template-columns:repeat(7,minmax(0,1fr));gap:22px 16px}
+[data-view=desktop] .kl-it:hover .cimg{transform:translateY(-4px) rotate(-2deg)}
+[data-view=desktop] .ksearch{max-width:560px}
+/* ---------- iPad (Tablet-Ansicht) ---------- */
+[data-view=tablet] main{max-width:900px;padding-left:32px;padding-right:32px;padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+[data-view=tablet] .top{padding-top:calc(12px + env(safe-area-inset-top));padding-bottom:12px}
+[data-view=tablet] .brand{font-size:1.3rem}[data-view=tablet] .brand img{height:36px}
+[data-view=tablet] .hlogo{width:170px}
+[data-view=tablet] .hero h1 .l2{font-size:2.8rem}
+[data-view=tablet] .hero p{max-width:520px;font-size:1.05rem}
+[data-view=tablet] .fan{height:340px;max-width:640px}
+[data-view=tablet] .fan .cimg{width:160px;margin-left:-80px;bottom:62px;transform:translateX(calc(var(--k,0) * 62px)) rotate(calc(var(--k,0) * 9deg)) translateY(calc(var(--ak,0) * 9px)) scale(calc(1 - var(--ak,0) * .07))}
+[data-view=tablet] .chips{max-width:640px;gap:9px}
+[data-view=tablet] .chip{font-size:.92rem;padding:9px 15px}
+[data-view=tablet] .chip svg{width:18px;height:18px}
+[data-view=tablet] #karte{max-width:640px;margin-left:auto;margin-right:auto}
+[data-view=tablet] .scan{padding:26px}
+[data-view=tablet] .code input{height:66px;font-size:2.2rem}
+[data-view=tablet] .code .btn{height:66px;padding:0 28px}
+[data-view=tablet] .tiles{max-width:640px;margin:0 auto}
+[data-view=tablet] .tile{padding:18px 20px;gap:14px}
+[data-view=tablet] .tile b{font-size:1.2rem}
+[data-view=tablet] .mtrack .cimg{width:118px}
+[data-view=tablet] .tcard.real{width:320px}
+[data-view=tablet] .tabs{padding-top:8px;padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+[data-view=tablet] .tabs .tw{max-width:640px}
+[data-view=tablet] .tabs a{font-size:.82rem}
+[data-view=tablet] .tabs a svg{width:28px;height:28px}
+[data-view=tablet] .item{padding:18px}
+[data-view=tablet] .items{grid-template-columns:1fr}
+[data-view=tablet] .item .price{font-size:1.9rem}
+[data-view=tablet] .fanhint{margin-top:-6px!important}
+[data-view=tablet] .ico{width:72px;height:72px}
+[data-view=tablet] .item{grid-template-columns:72px 1fr auto}
+[data-view=tablet] .cartbar{bottom:calc(92px + env(safe-area-inset-bottom));width:min(620px,calc(100% - 48px))}
+[data-view=tablet] .slots{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+[data-view=tablet] .acat{padding:18px}
+[data-view=tablet] .vars{gap:14px}
+[data-view=tablet] .mbox{max-width:520px}
+
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style>
 </head>
@@ -772,7 +843,7 @@ const DEF={
   k_kat:"Sammelalbum",h_kat:"Kategorien",s_kat:"Jede Karte gehört zu einer Kategorie. Sammle sie alle!",kat_label:"Kategorie",
   bonus:"🎁 Wer eine Kategorie komplett gesammelt hat, bekommt an unserem Stand eine exklusive Bonuskarte.",
   k_info:"Komm vorbei",h_info:"Infos",
-  nav_start:"Start",nav_album:"Album",
+  nav_start:"Start",nav_album:"Album",nav_kartenliste:"Karten",
   start_album:"Mein Album",start_album_s:"{n} von {m} Karten",start_album_g:"Jetzt anmelden & sammeln",start_stand:"Am Stand",start_stand_s:"Was ist noch da?",
   k_album:"Sammle sie alle",h_album:"Dein Album",s_album:"Gib die Codes deiner Karten ein – sie landen automatisch hier. Ist eine Kategorie komplett, zeig uns dein Album und die echten Karten am Stand. Dann gibt's die Special-Karte!",
   alb_login:"Melde dich mit Nickname und Passwort an, damit dein Album gespeichert wird – auch wenn du die Seite später wieder öffnest.",
@@ -888,7 +959,8 @@ Stand: November 2026`
 /* ============ ZUSTAND / HILFEN ============ */
 const S={stock:[],upd:null,card:null,err:"",busy:false,tok:null,admin:false,edit:false,login:false,loginErr:"",modal:null,taps:0,tapT:0,prev:{},seen:new Set(),phase:"",
   page:"start",cart:{},sim:null,gf:"all",pl:null,album:null,albumErr:"",note:"",noteK:"",pending:null,accErr:"",newName:null};
-const PAGES=["start","album","stand","infos"];
+const PAGES=["start","album","stand","infos","kartenliste"];
+const NAVP=()=>S.admin?PAGES:PAGES.slice(0,4);
 const hs=s=>{let h=0;for(const ch of String(s))h=(h*31+ch.codePointAt(0))|0;return h;};
 const OLD_DS=149985919; // alter Standard-Datenschutztext (vor dem Album) -> durch neuen ersetzen
 let C=null;
@@ -947,6 +1019,17 @@ async function login(email,pw){
   S.admin=await api("/rest/v1/rpc/is_admin",{method:"POST",body:{},auth:true})===true;
   if(!S.admin){logout();throw new Error("Dieses Konto ist kein Admin");}
 }
+async function adminSignup(email,pw){
+  const r=await fetch(CFG.url+"/auth/v1/signup",{method:"POST",headers:{apikey:CFG.key,"Content-Type":"application/json"},body:JSON.stringify({email,password:pw})});
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok){const m=String(d.error_code||d.msg||d.error_description||d.error||"");
+    throw new Error(/already|exists|registered/i.test(m)?"Diese E-Mail ist schon registriert – bitte einfach anmelden.":/weak|password/i.test(m)?"Das Passwort ist zu schwach.":"Registrieren fehlgeschlagen ("+(m||r.status)+")");}
+  if(!d.access_token)return "confirm";
+  saveTok(d);
+  S.admin=await api("/rest/v1/rpc/is_admin",{method:"POST",body:{},auth:true})===true;
+  if(!S.admin){logout();throw new Error("Konto erstellt, aber diese E-Mail hat keine Admin-Rechte.");}
+  return "ok";
+}
 function logout(){S.tok=null;S.admin=false;S.edit=false;try{localStorage.removeItem("jcbs-tok")}catch(e){}render();}
 async function loadCfg(){
   try{const d=await api("/rest/v1/site_config?id=eq.1&select=data");
@@ -992,7 +1075,7 @@ function applyView(){
   const m=viewMode(),vp=$("#vp");
   // feste Ansicht auf zu kleinem Bildschirm: Seite wie "Desktop-Website anfordern" verkleinert darstellen
   const want=m==="desktop"?1200:m==="tablet"?820:0;
-  const vc=want&&screen.width<want?`width=${want}`:"width=device-width,initial-scale=1,viewport-fit=cover";
+  const vc=want&&screen.width<want?`width=${want}`:"width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover";
   if(vp&&vp.content!==vc)vp.content=vc;
   const v=m==="auto"?autoView():m,h=document.documentElement,ch=h.dataset.view!==v;
   h.dataset.view=v;h.dataset.mode=m;return ch;
@@ -1082,7 +1165,8 @@ const TI={ // Tab-Symbole
  start:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>',
  album:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 4h12a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2z"/><path d="M5 18a2 2 0 0 1 2-2h12"/><path d="M12 7l1.2 2.5 2.8.3-2.1 1.9.6 2.8L12 13.1l-2.5 1.4.6-2.8L8 9.8l2.8-.3z" fill="currentColor" stroke="none"/></svg>',
  stand:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0A2.7 2.7 0 0 1 4 11z"/><path d="M5 13v7h14v-7"/></svg>',
- infos:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5" stroke-linecap="round"/></svg>'
+ infos:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5" stroke-linecap="round"/></svg>',
+ kartenliste:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="11" height="15" rx="2" transform="rotate(-8 8.5 12.5)"/><rect x="10" y="4" width="11" height="15" rx="2"/></svg>'
 };
 const ICN={pin:"Ort",clock:"Zeit",gift:"Geschenk",star:"Stern",info:"Info",euro:"Euro"};
 
@@ -1238,6 +1322,46 @@ function observe(){
   document.querySelectorAll(".rv").forEach((e,i)=>{if(S.seen.has(e.dataset.rv))e.classList.add("in");else{e.style.transitionDelay=(e.dataset.d||0)+"ms";io.observe(e);}});
 }
 
+/* ============ ADMIN: Kartenliste zum Zeigen ============ */
+const UML={koempf:"Kömpf",mueller:"Müller",schuehle:"Schühle",buechsel:"Büchsel",schuetz:"Schütz"};
+const KATN={gs:"Grundschule",rs:"Realschule",kombi:"Kombiklasse",gym:"Gymnasium",bg:"Berufl. Gymnasium",tb:"Team & Betreuung"};
+const PKAT={abele:"gs",dietz:"gs",geissinger:"gs",hanson:"gs",janz:"gs",mecks:"gs",miksche:"gs",rott:"gs",schuehle:"gs",zimmer:"gs",frasch:"gs",
+ behrens:"rs",freund:"rs",heidecker:"rs",hofer:"rs",homberg:"rs",meincke:"rs",merkle:"rs",mueller:"rs",papenhausen:"rs",schlegelmilch:"rs",wurster:"rs",laschuk:"rs",stephan:"rs",vollheim:"rs",
+ eberleh:"kombi",flaig:"kombi",leist:"kombi",schmidt:"kombi",wiebe:"kombi",
+ "dawideit-seifert":"gym",decker:"gym",illi:"gym",koempf:"gym",ross:"gym",gaiser:"gym",kuhs:"gym",maraha:"gym",schuetz:"gym",ulmer:"gym",
+ daenecke:"bg",buechsel:"bg",hauser:"bg",klein:"bg",krutscher:"bg","schmidt-daenecke":"bg",castano:"tb",luft:"tb"};
+const BILDN={christbaumkugeln:"Christbaumkugeln",lichterglanz:"Lichterglanz",tannengruen:"Tannengrün",weihnachtsmuetze:"Weihnachtsmütze",winterzauber:"Winterzauber"};
+const SPECN={grundschule:"Grundschule","realschule":"Realschule",kombiklasse:"Kombiklasse",gymnasium:"Gymnasium","berufl-gymnasium":"Berufliches Gymnasium","team-betreuung":"Team & Betreuung","jesus-christus-ist-sieger":"Jesus Christus ist Sieger!","schuljahresmotto-er-haelt":"Schuljahresmotto „ER HÄLT“"};
+function cardName(c){
+  const f=c.img.replace(/^karten\//,"").replace(/\.webp$/,"");
+  let m=f.match(/^(fr|hr)-(.+)-(common|rainbow|gold)$/);
+  if(m){const nm=m[2].split("-").map(p=>UML[p]||p[0].toUpperCase()+p.slice(1)).join("-");return {n:(m[1]==="fr"?"Fr. ":"Hr. ")+(UML[m[2]]||nm),k:KATN[PKAT[m[2]]]||""};}
+  if((m=f.match(/^bibelvers-(\d+)$/)))return {n:"Bibelvers "+m[1],k:"Bibelverse"};
+  if((m=f.match(/^bildkarte-(.+)$/)))return {n:"Bildkarte "+(BILDN[m[1]]||m[1]),k:"Bildkarten"};
+  if((m=f.match(/^special-(.+)$/)))return {n:"Special "+(SPECN[m[1]]||m[1]),k:"Special-Karten"};
+  if(/schulleiter/.test(f))return {n:"Schulleiter (Hr. Wurster)",k:"Schulleitung"};
+  if(/schulseelsorger/.test(f))return {n:"Schulseelsorger (Hr. Rudisile)",k:"Schulseelsorge"};
+  return {n:f,k:""};}
+const KF=[["all","Alle"],["common","Common"],["rainbow","Rainbow"],["gold","Gold"],["top","Legendär & Mythisch"],["bible","Bibelverse"],["bild","Bildkarten"],["special","Special"]];
+function kFilter(){
+  const q=String(S.kq||"").trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+  let n=0;document.querySelectorAll(".kl-it").forEach(el=>{const ok=!q||el.dataset.s.includes(q);el.hidden=!ok;if(ok)n++;});
+  const c=$("#kcount");if(c)c.textContent=n+(n===1?" Karte":" Karten");
+  const e=$("#kempty");if(e)e.hidden=n>0;}
+function pgKarten(){
+  if(!S.admin)return `<section style="margin-top:28px"><div class="scan"><p>Diese Seite ist nur für Admins.</p><button class="btn sm" data-a="go" data-p="start">Zur Startseite</button></div></section>`;
+  const f=S.kf||"all",d=deck().filter(c=>f==="all"||(f==="top"?(c.r==="legend"||c.r==="mythic"):c.r===f));
+  const norm=x=>x.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+  return `<section style="margin-top:28px"><span class="kicker">Nur für Admins</span><h2>Alle Karten</h2>
+   <p class="sub">Name suchen, Karte antippen – dann groß zum Zeigen.</p>
+   <div class="ksearch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+    <input id="kq" type="search" placeholder="Name suchen, z. B. Merkle" autocomplete="off" autocapitalize="off" spellcheck="false" value="${E(S.kq||"")}"><button class="kx" data-a="kclr" aria-label="Suche leeren">✕</button></div>
+   <div class="gfil">${KF.map(([id,n])=>`<button data-a="kf" data-f="${id}" class="${f===id?"on":""}">${E(n)}</button>`).join("")}</div>
+   <p class="hint" id="kcount" style="margin:0 0 10px">${d.length} Karten</p>
+   <div class="klist">${d.map(c=>{const nm=cardName(c),r=rarOf(c.r);
+     return `<button class="kl-it" data-a="zoom" data-img="${E(c.img)}" data-r="${E(c.r)}" data-n="${E(nm.n)}" data-s="${E(norm(nm.n+" "+nm.k+" "+r.name))}">${cimg(c)}<b>${E(nm.n)}</b><small style="color:${col(r.col)}">${E(r.name)}${nm.k?` · <span>${E(nm.k)}</span>`:""}</small></button>`;}).join("")}</div>
+   <p class="hint" id="kempty" hidden>Keine Karte gefunden.</p></section>`;}
+
 /* ============ ADMIN-EDITOREN ============ */
 const inp=(f,v,ph="",type="text")=>`<input type="${type}" data-f="${f}" value="${E(v)}" placeholder="${E(ph)}">`;
 function edRar(){
@@ -1284,11 +1408,14 @@ function legalHTML(s){
 function modalHTML(){
   const m=S.modal;if(!m)return "";
   if(m.type==="login")return `<div class="modal"><form class="mbox" id="lform">
-   <h2 style="font-size:1.5rem">Admin-Login</h2>
-   <input type="email" id="lmail" placeholder="E-Mail" autocomplete="username" required>
-   <input type="password" id="lpw" placeholder="Passwort" autocomplete="current-password" required>
+   <h2 style="font-size:1.5rem">${m.reg?"Admin-Konto erstellen":"Admin-Login"}</h2>
+   <div class="tabsw"><button type="button" data-a="lmode" data-m="0" class="${m.reg?"":"on"}">Anmelden</button><button type="button" data-a="lmode" data-m="1" class="${m.reg?"on":""}">Konto erstellen</button></div>
+   <input type="email" id="lmail" placeholder="E-Mail" autocomplete="username" required value="${E(m.mail||"")}">
+   <input type="password" id="lpw" placeholder="Passwort${m.reg?" (mind. 6 Zeichen)":""}" autocomplete="${m.reg?"new-password":"current-password"}" minlength="6" required>
+   ${m.reg?`<input type="password" id="lpw2" placeholder="Passwort wiederholen" autocomplete="new-password" required><p class="hint">Nur die Admin-Adresse bekommt Admin-Rechte. Ggf. kommt eine Bestätigungs-Mail – Link anklicken, dann hier anmelden.</p>`:""}
+   ${S.loginInfo?`<div class="note ok" style="margin-top:12px">${E(S.loginInfo)}</div>`:""}
    ${S.loginErr?`<div class="msg">${E(S.loginErr)}</div>`:""}
-   <div class="row"><button type="button" class="btn ghost" data-a="mclose">Abbrechen</button><button class="btn" type="submit">Anmelden</button></div></form></div>`;
+   <div class="row"><button type="button" class="btn ghost" data-a="mclose">Abbrechen</button><button class="btn" type="submit">${m.reg?"Erstellen":"Anmelden"}</button></div></form></div>`;
   if(m.type==="text")return `<div class="modal"><form class="mbox" id="tform">
    <h2 style="font-size:1.3rem">Text bearbeiten</h2>
    <textarea id="tval" rows="4">${E(C.t[m.key]??DEF.t[m.key]??"")}</textarea>
@@ -1327,7 +1454,7 @@ function modalHTML(){
   if(m.type==="zoom"){const r=rarOf(m.r);
     return `<div class="modal" data-a="mbg"><div class="mbox zbox">
      <div class="stage" style="--rc:${col(r.col)}">${(RANK[m.r]||1)>=3&&!RM?'<div class="rays"></div>':""}${cardHTML({img:m.img,rarity:m.r,name:r.name},"zoomc")}</div>
-     <div class="zcap"><b style="color:${col(r.col)}">${rlabel({rarity:m.r})}</b>${r.info?`<small>${E(r.info)}</small>`:""}</div>
+     <div class="zcap">${m.name?`<b class="zname">${E(m.name)}</b>`:""}<b style="color:${col(r.col)}">${rlabel({rarity:m.r})}</b>${m.name?"":r.info?`<small>${E(r.info)}</small>`:""}</div>
      <div class="row"><button class="btn ghost" data-a="mclose">Schließen</button></div></div></div>`;}
   if(m.type==="card"){const c=S.album&&S.album.cards[m.i];if(!c)return "";const k=katOf(c.kat);
     return `<div class="modal" data-a="mbg"><div class="mbox" style="background:transparent;border:0;box-shadow:none;overflow:visible">
@@ -1438,19 +1565,19 @@ function cardAdminHTML(){
 }
 function render(){
   $("#app").className=S.edit?"editing":"";
-  const pg={start:pgStart,album:pgAlbum,stand:pgStand,infos:pgInfos}[S.page]||pgStart;
+  const pg={start:pgStart,album:pgAlbum,stand:pgStand,infos:pgInfos,kartenliste:pgKarten}[S.page]||pgStart;
   $("#app").innerHTML=`
   ${S.admin?`<div class="adm"><span>Admin</span><button data-a="edit" class="${S.edit?"on":""}">${S.edit?"✓ Fertig":"✏️ Bearbeiten"}</button><button data-a="logout">Abmelden</button></div>`:""}
   <div class="top"><a class="brand" href="#start"><img src="${LOGO_S}" alt="">${E(T("titel"))} <b>${E(T("titel2"))}</b></a>
-   <nav class="tnav">${PAGES.map(p=>`<a href="#${p}" class="${S.page===p?"on":""}">${TI[p]}${E(T(p==="infos"?"nav_info":"nav_"+p))}${p==="album"?badge().replace('id="tabbd"',''):""}</a>`).join("")}</nav>
+   <nav class="tnav">${NAVP().map(p=>`<a href="#${p}" class="${S.page===p?"on":""}">${TI[p]}${E(T(p==="infos"?"nav_info":"nav_"+p))}${p==="album"?badge().replace('id="tabbd"',''):""}</a>`).join("")}</nav>
    <button class="accb${S.pl?" in":""}" data-a="acc">${IC.user}<span>${E(S.pl?S.pl.nick:T("btn_login"))}</span></button></div>
   <div class="page" data-pg="${S.page}">${pg()}</div>
   <footer>${tx("footer",null,"div","ft")}
    <div class="legal"><button data-a="legal" data-k="imp">${E(T("l_imp"))}</button><button data-a="legal" data-k="ds">${E(T("l_ds"))}</button></div>
    <button class="viewb" data-a="view">${VIC[CUR_VIEW()]} ${E(T("view_btn"))}: ${E(viewLabel(viewMode()))}${viewMode()==="auto"?` (${E(viewLabel(CUR_VIEW()))})`:""}</button></footer>
-  <nav class="tabs"><div class="tw">${PAGES.map(p=>`<a href="#${p}" class="${S.page===p?"on":""}"${S.page===p?' aria-current="page"':""}>${TI[p]}${tx(p==="infos"?"nav_info":"nav_"+p)}${p==="album"?badge():""}</a>`).join("")}</div></nav>
+  <nav class="tabs"><div class="tw" style="grid-template-columns:repeat(${NAVP().length},1fr)">${NAVP().map(p=>`<a href="#${p}" class="${S.page===p?"on":""}"${S.page===p?' aria-current="page"':""}>${TI[p]}${tx(p==="infos"?"nav_info":"nav_"+p)}${p==="album"?badge():""}</a>`).join("")}</div></nav>
   ${modalHTML()}`;
-  renderStock();renderResult();renderSim();setupFan();observe();bindTilt();
+  renderStock();renderResult();renderSim();setupFan();observe();bindTilt();if(S.page==="kartenliste"&&S.kq)kFilter();
 }
 function go(p,push=true){
   p=PAGES.includes(p)?p:({karte:"start",selten:"infos",kategorien:"album"})[p]||"start";
@@ -1549,8 +1676,16 @@ document.addEventListener("submit",async e=>{
   e.preventDefault();
   const id=e.target.id;
   if(id==="cform")return check();
-  if(id==="lform"){S.loginErr="";
-    try{await login($("#lmail").value.trim(),$("#lpw").value);S.modal=null;toast("Angemeldet ✓");}catch(er){S.loginErr=er.message;}
+  if(id==="lform"){S.loginErr="";S.loginInfo="";const mail=$("#lmail").value.trim(),pw=$("#lpw").value;S.modal.mail=mail;
+    try{
+      if(S.modal.reg){
+        if(pw.length<6)throw new Error("Das Passwort braucht mindestens 6 Zeichen.");
+        if(pw!==$("#lpw2").value)throw new Error("Die beiden Passwörter sind nicht gleich.");
+        const r=await adminSignup(mail,pw);
+        if(r==="confirm"){S.modal.reg=false;S.loginInfo="Konto erstellt! Bitte den Link in der Bestätigungs-Mail anklicken und dich dann hier anmelden.";}
+        else{S.modal=null;toast("Admin-Konto erstellt ✓");}
+      }else{await login(mail,pw);S.modal=null;toast("Angemeldet ✓");}
+    }catch(er){S.loginErr=er.message;}
     return render();}
   if(id==="accform"){const btn=e.target.querySelector("[type=submit]");btn.disabled=true;S.accErr="";
     const nick=$("#anick").value,mode=S.modal.mode;
@@ -1567,6 +1702,7 @@ document.addEventListener("submit",async e=>{
     try{await saveCfg();S.modal=null;}catch(er){C.t[k]=old;alert(er.message);}return render();}
 });
 document.addEventListener("input",e=>{
+  if(e.target.id==="kq"){S.kq=e.target.value;kFilter();return;}
   if(e.target.id!=="code")return;
   const v=e.target.value.replace(/\D/g,"").slice(0,6);e.target.value=v;
   if(v.length===6)check();
@@ -1581,7 +1717,8 @@ document.addEventListener("click",async e=>{
   const a=b.dataset.a;
   if(a==="mbg"){if(e.target===b){S.modal=null;render();}return;}
   if(a==="logout")return logout();
-  if(a==="mclose"){S.modal=null;return render();}
+  if(a==="mclose"){S.modal=null;S.loginInfo="";return render();}
+  if(a==="lmode"){const ml=$("#lmail");S.modal.mail=ml?ml.value:"";S.modal.reg=b.dataset.m==="1";S.loginErr="";S.loginInfo="";return render();}
   if(a==="edit"){S.edit=!S.edit;if(!S.edit)loadCfg();return render();}
   if(a==="legal"){S.modal={type:"legal",key:b.dataset.k};return render();}
   if(a==="lsave"){const k=S.modal.key,old=C.legal[k];C.legal[k]=$("#lval").value;
@@ -1597,7 +1734,9 @@ document.addEventListener("click",async e=>{
   if(a==="accmode"){const n=$("#anick").value;S.accErr="";S.modal.mode=b.dataset.m;render();$("#anick").value=n;return;}
   if(a==="plout"){S.modal=null;plOut(true);toast("Abgemeldet");return render();}
   if(a==="card"){S.modal={type:"card",i:+b.dataset.i};render();bindTilt();return;}
-  if(a==="zoom"){const u=safeImg(b.dataset.img);if(!u)return;S.modal={type:"zoom",img:u,r:b.dataset.r||"common"};render();return;}
+  if(a==="zoom"){if(!S.admin)return;const u=safeImg(b.dataset.img);if(!u)return;S.modal={type:"zoom",img:u,r:b.dataset.r||"common",name:b.dataset.n||""};render();return;}
+  if(a==="kf"){S.kf=b.dataset.f;render();const q=$("#kq");if(q&&S.kq){q.value=S.kq;kFilter();}return;}
+  if(a==="kclr"){S.kq="";const q=$("#kq");if(q){q.value="";kFilter();q.focus();}return;}
   if(a==="fan"){if(S.fanSw){S.fanSw=false;return;}const i=+b.dataset.i;S.fanHold=Date.now();
     S.fanF=i;setupFan();return;}
   if(a==="gf"){S.gf=b.dataset.f;render();return;}
@@ -1674,6 +1813,11 @@ document.addEventListener("visibilitychange",()=>{if(!document.hidden){loadStock
     requestAnimationFrame(loop);
   })(0);
 })();
+
+/* ============ APP-VERHALTEN: kein Pinch-/Doppeltipp-Zoom ============ */
+["gesturestart","gesturechange","gestureend"].forEach(t=>document.addEventListener(t,e=>e.preventDefault(),{passive:false}));
+document.addEventListener("touchmove",e=>{if(e.touches&&e.touches.length>1)e.preventDefault();},{passive:false});
+addEventListener("wheel",e=>{if(e.ctrlKey&&matchMedia("(pointer:coarse)").matches)e.preventDefault();},{passive:false});
 
 /* ============ START ============ */
 (function(){
